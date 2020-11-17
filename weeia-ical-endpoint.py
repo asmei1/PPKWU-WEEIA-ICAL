@@ -10,13 +10,14 @@ WEEIA_URL = "http://www.weeia.p.lodz.pl"
 
 
 def parseWeeiaWebsite(year, month):
-    page = requests.get(WEEIA_URL)
+    page = requests.get('http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok={}&miesiac={}&lang=pl'.format(year, month))
     soup = BeautifulSoup(page.content, "html.parser")
 
     result = soup.find(id="kalendarz")
     events = []
     for row in result.find_all("tr", {"class": "dzien"}):
         for day in row.find_all("a"):
+            print(day.contents)
             for inner_box in day.find_all("div", {"class": "InnerBox"}):
                 for e in inner_box.find_all("p"):
                     events = {"event": e.contents, "day": day.contents }
@@ -27,6 +28,7 @@ def parseWeeiaWebsite(year, month):
 
 def prepareICal(year, month):
     cal = Calendar()
+    print(parseWeeiaWebsite(year, month))
     for title, day in parseWeeiaWebsite(year, month):
         event = Event()
         event.name = title
@@ -36,7 +38,7 @@ def prepareICal(year, month):
     print(cal.events)
 
 
-prepareICal(2020, 11)
+prepareICal(2020, 10)
 
 @app.route('/weeia_ical', methods=["GET"])
 def string_api():
