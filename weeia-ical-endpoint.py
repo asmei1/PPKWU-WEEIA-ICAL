@@ -1,12 +1,14 @@
-wfrom flask import Flask, request
+import datetime
+from flask import Flask, request
 
 app = Flask(__name__)
 
 
 @app.route('/weeia_ical', methods=["GET"])
 def string_api():
-    month = request.args.get("month", None)
-    year = request.args.get("year", None)
+    dt = datetime.datetime.today()
+    month = request.args.get("month", dt.month)
+    year = request.args.get("year", dt.year)
 
     return {"year": year, "month":month}
 
