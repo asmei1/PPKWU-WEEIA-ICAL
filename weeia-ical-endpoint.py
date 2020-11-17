@@ -1,7 +1,18 @@
 import datetime
+import requests
 from flask import Flask, request
+from bs4 import BeautifulSoup
+
 
 app = Flask(__name__)
+WEEIA_URL = "http://www.weeia.p.lodz.pl"
+
+
+def parseWeeiaWebsite(month, year):
+    page = requests.get(WEEIA_URL)
+    print(page)
+
+parseWeeiaWebsite(0, 0)
 
 
 @app.route('/weeia_ical', methods=["GET"])
@@ -10,7 +21,8 @@ def string_api():
     month = request.args.get("month", dt.month)
     year = request.args.get("year", dt.year)
 
-    return {"year": year, "month":month}
+
+    return {"year": year, "month": month}
 
 
 
