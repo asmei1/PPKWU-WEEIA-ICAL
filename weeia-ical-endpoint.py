@@ -1,5 +1,6 @@
 import datetime
 import requests
+from ics import Calendar, Event
 from flask import Flask, request
 from bs4 import BeautifulSoup
 
@@ -8,27 +9,34 @@ app = Flask(__name__)
 WEEIA_URL = "http://www.weeia.p.lodz.pl"
 
 
-def parseWeeiaWebsite(month, year):
+def parseWeeiaWebsite(year, month):
     page = requests.get(WEEIA_URL)
     soup = BeautifulSoup(page.content, "html.parser")
 
     result = soup.find(id="kalendarz")
-    days = []
     events = []
     for row in result.find_all("tr", {"class": "dzien"}):
         for day in row.find_all("a"):
-            days = day.contents
             for inner_box in day.find_all("div", {"class": "InnerBox"}):
                 for e in inner_box.find_all("p"):
                     events = {"event": e.contents, "day": day.contents }
                     print({"event": e.contents, "day": day.contents })
 
-    return days, events
+    return events
 
 
+def prepareICal(year, month):
+    cal = Calendar()
+    for title, day in parseWeeiaWebsite(year, month):
+        event = Event()
+        event.name = title
+        event.begin = year + "-" + month + "-" + day + "00:00:00"
 
-parseWeeiaWebsite(0, 0)
+        cal.events.add(event)
+    print(cal.events)
 
+
+prepareICal(2020, 11)
 
 @app.route('/weeia_ical', methods=["GET"])
 def string_api():
