@@ -10,7 +10,13 @@ WEEIA_URL = "http://www.weeia.p.lodz.pl"
 
 def parseWeeiaWebsite(month, year):
     page = requests.get(WEEIA_URL)
-    print(page)
+    soup = BeautifulSoup(page.content, "html.parser")
+
+    result = soup.find(id="kalendarz")
+    days = result.find_all("tr", {"class": "dzien"})
+
+    print(days)
+
 
 parseWeeiaWebsite(0, 0)
 
