@@ -14,9 +14,16 @@ def parseWeeiaWebsite(month, year):
 
     result = soup.find(id="kalendarz")
     days = []
+    events = []
     for row in result.find_all("tr", {"class": "dzien"}):
         for day in row.find_all("a"):
-            print(day.contents)
+            days = day.contents
+            for inner_box in day.find_all("div", {"class": "InnerBox"}):
+                for e in inner_box.find_all("p"):
+                    events = {"event": e.contents, "day": day.contents }
+                    print({"event": e.contents, "day": day.contents })
+
+    return days, events
 
 
 
