@@ -13,9 +13,11 @@ def parseWeeiaWebsite(month, year):
     soup = BeautifulSoup(page.content, "html.parser")
 
     result = soup.find(id="kalendarz")
-    days = result.find_all("tr", {"class": "dzien"})
+    days = []
+    for row in result.find_all("tr", {"class": "dzien"}):
+        for day in row.find_all("a"):
+            print(day.contents)
 
-    print(days)
 
 
 parseWeeiaWebsite(0, 0)
