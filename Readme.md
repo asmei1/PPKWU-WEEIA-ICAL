@@ -4,10 +4,10 @@
 
 This api will analyze WEEIA calendar (from http://www.weeia.p.lodz.pl) and returns a calendar
 in ICAL format.
-User could receive ICAL with events WEEIA events
+User could receive ICAL which contains events WEEIA
 
 ## Run REST server
-To run this FLASK server execute in consol 
+To run this FLASK server execute in console
 ```
   flask run
   ```
