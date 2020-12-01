@@ -31,6 +31,8 @@ def prepareICal(year, month):
     for title, day in parseWeeiaWebsite(year, month):
         event = Event()
         event.name = title
+        if int(day) < 10:
+            day = "0" + day
         event.begin = year + "-" + month + "-" + day + "00:00:00"
 
         cal.events.add(event)
