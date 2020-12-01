@@ -9,7 +9,7 @@ app = Flask(__name__)
 WEEIA_URL = "http://www.weeia.p.lodz.pl"
 
 
-def parseWeeiaWebsite(year, month):
+def parse_weeia_website(year, month):
     URL = 'http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=' + year + '&miesiac=' + month
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -26,9 +26,9 @@ def parseWeeiaWebsite(year, month):
     return events
 
 
-def prepareICal(year, month):
+def prepare_ical(year, month):
     cal = Calendar()
-    for title, day in parseWeeiaWebsite(year, month):
+    for title, day in parse_weeia_website(year, month):
         event = Event()
         event.name = title
         if int(day) < 10:
@@ -45,8 +45,9 @@ def string_api():
     month = request.args.get("month", dt.month)
     year = request.args.get("year", dt.year)
 
+    cal = prepare_ical(year, month)
 
-    return {"year": year, "month": month}
+    return {"ics": str(cal)}
 
 
 
