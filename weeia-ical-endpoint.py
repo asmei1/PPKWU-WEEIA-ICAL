@@ -28,17 +28,14 @@ def parseWeeiaWebsite(year, month):
 
 def prepareICal(year, month):
     cal = Calendar()
-    print(parseWeeiaWebsite(year, month))
     for title, day in parseWeeiaWebsite(year, month):
         event = Event()
         event.name = title
         event.begin = year + "-" + month + "-" + day + "00:00:00"
 
         cal.events.add(event)
-    print(cal.events)
+    return cal
 
-
-prepareICal(2020, 10)
 
 @app.route('/weeia_ical', methods=["GET"])
 def string_api():
