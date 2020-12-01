@@ -6,10 +6,11 @@ from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
-WEEIA_URL = "http://www.weeia.p.lodz.pl"
-
 
 def parse_weeia_website(year, month):
+    if len(month) <= 1:
+        month = "0" + month
+
     URL = 'http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=' + year + '&miesiac=' + month
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
