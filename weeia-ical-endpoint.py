@@ -42,8 +42,8 @@ def prepare_ical(year, month):
 @app.route('/weeia_ical', methods=["GET"])
 def string_api():
     dt = datetime.datetime.today()
-    month = request.args.get("month", dt.month)
-    year = request.args.get("year", dt.year)
+    year = request.args.get("year", str(dt.year))
+    month = request.args.get("month", str(dt.month))
 
     cal = prepare_ical(year, month)
 
