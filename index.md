@@ -52,6 +52,6 @@ If year param will be not given, actual will be taken.
 # Examples
 Example .ics files could downloaded here:
 <br>
-<a href="https://github.com/asmei1/PPKWU-WEEIA-ICAL/blob/gh-pages/march_weeia.ics" download> March 2020 </a>
+<a href="march_weeia.ics" download="download"> March 2020 </a>
 <br>
-<a href="https://github.com/asmei1/PPKWU-WEEIA-ICAL/blob/gh-pages/october_weeia.ics" download> October 2020 </a>
+<a href="october_weeia.ics" download="download"> October 2020 </a>
