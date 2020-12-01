@@ -50,3 +50,8 @@ If month param will be not given, actual will be taken.<br>
 If year param will be not given, actual will be taken.
 
 # Examples
+Example .ics files could downloaded here:
+<br>
+<a href="march_weeia.ics" download> March 2020 </href>
+<br>
+<a href="october_weeia.ics" download> October 2020 </href>
