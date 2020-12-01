@@ -10,18 +10,18 @@ WEEIA_URL = "http://www.weeia.p.lodz.pl"
 
 
 def parseWeeiaWebsite(year, month):
-    page = requests.get('http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok={}&miesiac={}&lang=pl'.format(year, month))
+    URL = 'http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=' + year + '&miesiac=' + month
+    page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
 
     result = soup.find(id="kalendarz")
     events = []
     for row in result.find_all("tr", {"class": "dzien"}):
         for day in row.find_all("a"):
-            print(day.contents)
-            for inner_box in day.find_all("div", {"class": "InnerBox"}):
+            for inner_box in day.parent.find_all("div", {"class": "InnerBox"}):
                 for e in inner_box.find_all("p"):
-                    events = {"event": e.contents, "day": day.contents }
-                    print({"event": e.contents, "day": day.contents })
+                    events.append(("".join(str(item) for item in e.contents),
+                                   "".join(str(item) for item in day.contents)))
 
     return events
 
