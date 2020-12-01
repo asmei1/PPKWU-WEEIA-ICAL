@@ -1,7 +1,7 @@
 import datetime
 import requests
 from ics import Calendar, Event
-from flask import Flask, request
+from flask import Flask, request, send_file
 from bs4 import BeautifulSoup
 
 
@@ -47,7 +47,9 @@ def string_api():
 
     cal = prepare_ical(year, month)
 
-    return {"ics": str(cal)}
+    import io
+    f = io.BytesIO(str.encode(str(cal)))
+    return send_file(f, mimetype="text/calendar")
 
 
 
