@@ -1,6 +1,6 @@
 # API Documentation
 
-This api will analyze WEEIA calendar (from http://www.weeia.p.lodz.pl) and returns a calendar
+This api will analyze WEEIA calendar (from [WEEIA](http://www.weeia.p.lodz.pl)) and returns a calendar
 in ICAL format.
 User could receive ICAL (.ics) file, compliant with the standard [RFC2455](https://www.ietf.org/rfc/rfc2445.txt) which contains WEEIA events. 
 
@@ -16,7 +16,9 @@ To use server, send your GET request to endpoint:
     http://localhost:8080/weeia_ical
 ```
 
-You can choose month and year from server should parse the calendar by use month and year params.
+You can choose month and year from server should parse the calendar by use **month** and **year** params.
+<br>
+<br>
 This example will get calendar for December 2020
 ```
     http://localhost:8080/weeia_ical?month=12&year=2020
@@ -44,7 +46,7 @@ UID:5b97f4b5-eb66-4036-973a-d14a95475c0d@5b97.org
 END:VEVENT
 END:VCALENDAR
 ```
-If month param will be not given, actual will be taken.
+If month param will be not given, actual will be taken.<br>
 If year param will be not given, actual will be taken.
 
 # Examples
